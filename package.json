@@ -29,5 +29,13 @@
     "@nuxtjs/eslint-config-typescript": "latest",
     "eslint": "latest",
     "nuxt": "^3.0.0-rc.1"
-  }
+  },
+  "keywords": [
+    "nuxt 3",
+    "@vue",
+    "vue",
+    "nuxt runtime compiler",
+    "nuxtjs",
+    "ssr"
+  ]
 }
