@@ -2,7 +2,7 @@
 
 Module for Nuxt 3 enabling the runtime compiler for both SSR and client.
 
-Currently compatible with `nuxt.rc-1`
+Currently compatible with `nuxt^3.0.0-rc.1` and `nuxt^3.0.0-rc.2`
 
 ## Installation
 
