@@ -1,9 +1,8 @@
-import { resolve } from "path";
-import { fileURLToPath } from "url";
-import { defineNuxtModule, addPlugin } from "@nuxt/kit";
+import { defineNuxtModule } from "@nuxt/kit";
 import commonjs from "@rollup/plugin-commonjs";
+
 export interface ModuleOptions {
-  addPlugin: boolean;
+  includeVue: boolean;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -12,6 +11,9 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: "nuxt3RuntimeCompilerModule",
   },
   setup(options, nuxt) {
+
+    const {includeVue} = options;
+
     // remove vue 3 mocks
     nuxt.options.alias = {
       ...nuxt.options.alias,
@@ -32,28 +34,40 @@ export default defineNuxtModule<ModuleOptions>({
       nuxt.options.nitro.hooks = {};
     }
 
-    nuxt.options.nitro.hooks["rollup:before"] = (nitro) => {
-      // get the index of @rollup/plugin-commonjs set by nitro
-      const indexOfCommonJsPlugin =
-        nitro.options.rollupConfig.plugins.findIndex((plugin) => {
-          return typeof plugin !== "boolean" && plugin.name === "commonjs";
-        });
+    // unmock vue
+    const dynamicRequireTargets = [
+      "./node_modules/@vue/compiler-core",
+      "./node_modules/@vue/compiler-dom",
+      "./node_modules/@vue/compiler-ssr",
+      "./node_modules/vue/server-renderer",
+    ];
 
-      if (indexOfCommonJsPlugin >= 0) {
-        // replace the @rollup/plugin-commonjs set by nitro
-        nitro.options.rollupConfig.plugins.splice(
-          indexOfCommonJsPlugin,
-          1,
-          commonjs({
-            dynamicRequireTargets: [
-              "./node_modules/@vue/compiler-core",
-              "./node_modules/@vue/compiler-dom",
-              "./node_modules/@vue/compiler-ssr",
-              "./node_modules/vue/server-renderer",
-            ],
-          })
-        );
-      }
-    };
+    if(includeVue) {
+      dynamicRequireTargets.push('./node_modules/vue')
+    }
+
+    if(nuxt._version === '3.0.0-rc.1'){
+      // nuxt rc 1 compatibility
+      nuxt.options.nitro.hooks["rollup:before"] = (nitro) => {
+        // get the index of @rollup/plugin-commonjs set by nitro
+        const indexOfCommonJsPlugin =
+          nitro.options.rollupConfig.plugins.findIndex((plugin) => {
+            return typeof plugin !== "boolean" && plugin.name === "commonjs";
+          });
+  
+        if (indexOfCommonJsPlugin >= 0) {
+          // replace the @rollup/plugin-commonjs set by nitro
+          nitro.options.rollupConfig.plugins.splice(
+            indexOfCommonJsPlugin,
+            1,
+            commonjs({
+              dynamicRequireTargets
+            })
+          );
+        }
+      };
+    } else {
+      nuxt.options.commonJS.dynamicRequireTargets = dynamicRequireTargets
+    }
   },
 });
