@@ -35,5 +35,6 @@
     "nuxt runtime compiler",
     "nuxtjs",
     "ssr"
-  ]
+  ],
+  "repository": "huang-julien/nuxt3-runtime-compiler-module"
 }
