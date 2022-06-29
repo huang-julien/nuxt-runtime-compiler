@@ -1,8 +1,6 @@
-# nuxt3-runtime-compiler-module
+# nuxt-runtime-compiler-module
 
-Module for Nuxt 3 enabling the runtime compiler for both SSR and client.
-
-Currently compatible with `nuxt^3.0.0-rc.1` and `nuxt^3.0.0-rc.2`
+Module for Nuxt 2 and 3 enabling the runtime compiler for both SSR and client.
 
 ## Installation
 
@@ -12,7 +10,7 @@ Add the module to nuxt config file:
 ```ts
 
 export default defineNuxtConfig({
-    modules: ["nuxt3-runtime-compiler-module"]
+    modules: ["nuxt-runtime-compiler-module"]
 })
 
 ```
