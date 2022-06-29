@@ -1,5 +1,4 @@
 import { defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
-import { resolve } from 'pathe'
 
 export default defineNuxtModule({
   meta: {
@@ -75,14 +74,20 @@ export default defineNuxtModule({
         }
       })
 
-      // unmock vue
-      nuxt.options.nitro.commonJS = {
+      // allow dynamic require -- passed to rollup
+      const commonJS = {
         dynamicRequireTargets: [
           './node_modules/@vue/compiler-core',
           './node_modules/@vue/compiler-dom',
           './node_modules/@vue/compiler-ssr',
           './node_modules/vue/server-renderer'
-        ]
+        ].concat(nuxt.options.nitro.commonJS?.dynamicRequireTargets ?? [])
+      }
+
+      if (nuxt.options.nitro.commonJS) {
+        Object.assign(nuxt.options.nitro.commonJS, commonJS)
+      } else {
+        nuxt.options.nitro.commonJS = commonJS
       }
     }
   }
