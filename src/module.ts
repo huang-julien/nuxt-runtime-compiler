@@ -9,7 +9,7 @@ export default defineNuxtModule({
   setup (_options, nuxt) {
     if (isNuxt2(nuxt)) {
       /** override all nuxt default vue aliases to force uses of the full bundle of VueJS  */
-      const vueFullCommonPath = resolve(__dirname, 'node_modules/vue/dist/vue.common.js')
+      const vueFullCommonPath = 'vue/dist/vue.common.js'
       const aliases = [
         'vue/dist/vue.common.dev',
         'vue/dist/vue.common.dev.js',
