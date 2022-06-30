@@ -1,6 +1,7 @@
 {
-  "name": "nuxt3-runtime-compiler-module",
-  "version": "1.0.4",
+  "name": "nuxt-runtime-compiler",
+  "version": "1.0.5",
+  "description": "A simple module enabling the vue template compiler on Nuxt 2 and 3",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -14,6 +15,11 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/huang-julien/nuxt-runtime-compiler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huang-julien/nuxt-runtime-compiler"
+  },
   "scripts": {
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
@@ -21,22 +27,18 @@
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.2",
-    "@rollup/plugin-commonjs": "^22.0.0"
+    "@nuxt/kit": "^3.0.0-rc.4"
   },
   "devDependencies": {
     "@nuxt/module-builder": "latest",
     "@nuxtjs/eslint-config-typescript": "latest",
     "eslint": "latest",
-    "nuxt": "^3.0.0-rc.2"
+    "nuxt": "^3.0.0-rc.4"
   },
   "keywords": [
-    "nuxt 3",
-    "@vue",
-    "vue",
+    "nuxt",
     "nuxt runtime compiler",
     "nuxtjs",
     "ssr"
-  ],
-  "repository": "huang-julien/nuxt3-runtime-compiler-module"
+  ]
 }
