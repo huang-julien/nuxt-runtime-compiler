@@ -1,6 +1,6 @@
-# nuxt-runtime-compiler-module
+# nuxt-runtime-compiler
 
-Module for Nuxt 2 and 3 enabling the runtime compiler for both SSR and client.
+A simple module to enable vue runtime bundle on Nuxt 2 and 3
 
 ## Installation
 
