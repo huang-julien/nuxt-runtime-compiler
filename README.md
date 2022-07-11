@@ -1,4 +1,4 @@
-# nuxt-runtime-compiler-module
+# nuxt-runtime-compiler
 
 Module for Nuxt 2 and 3 enabling the runtime compiler for both SSR and client.
 
@@ -10,7 +10,7 @@ Add the module to nuxt config file:
 ```ts
 
 export default defineNuxtConfig({
-    modules: ["nuxt-runtime-compiler-module"]
+    modules: ["nuxt-runtime-compiler"]
 })
 
 ```
