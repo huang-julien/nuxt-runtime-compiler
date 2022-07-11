@@ -10,7 +10,7 @@ Add the module to nuxt config file:
 ```ts
 
 export default defineNuxtConfig({
-    modules: ["nuxt-runtime-compiler-module"]
+    modules: ["nuxt-runtime-compiler"]
 })
 
 ```
