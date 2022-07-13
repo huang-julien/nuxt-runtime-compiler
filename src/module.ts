@@ -1,11 +1,20 @@
 import { defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
+import {resolve} from "pathe"
+
+interface NuxtRuntimeCompilerOptions {
+  nodeModulesRoot?: string,
+  includeVue?: boolean
+}
 
 export default defineNuxtModule({
   meta: {
     name: 'nuxt-runtime-compiler',
     configKey: 'nuxtRuntimeCompiler'
   },
-  setup (_options, nuxt) {
+  setup (options: NuxtRuntimeCompilerOptions, nuxt) {
+
+    const { nodeModulesRoot = './', includeVue = true } = options;
+
     if (isNuxt2(nuxt)) {
       /** override all nuxt default vue aliases to force uses of the full bundle of VueJS  */
       const vueFullCommonPath = 'vue/dist/vue.common.js'
@@ -56,7 +65,7 @@ export default defineNuxtModule({
       }
 
       // set vue esm on client
-      nuxt.hook('vite:extendConfig', (config, { isClient, isServer }) => {
+      nuxt.hook('vite:extendConfig', (config, { isClient }) => {
         if (isClient) {
           config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
         }
@@ -77,11 +86,15 @@ export default defineNuxtModule({
       // allow dynamic require -- passed to rollup
       const commonJS = {
         dynamicRequireTargets: [
-          './node_modules/@vue/compiler-core',
-          './node_modules/@vue/compiler-dom',
-          './node_modules/@vue/compiler-ssr',
-          './node_modules/vue/server-renderer'
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-core') ,
+          resolve(nodeModulesRoot, 'node_modules','@vue/compiler-dom'),
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-ssr'),
+          resolve(nodeModulesRoot, 'node_modules', 'vue/server-renderer')
         ].concat(nuxt.options.nitro.commonJS?.dynamicRequireTargets ?? [])
+      }
+
+      if(includeVue) {
+        commonJS.dynamicRequireTargets.push(resolve(nodeModulesRoot, 'vue'))
       }
 
       if (nuxt.options.nitro.commonJS) {
