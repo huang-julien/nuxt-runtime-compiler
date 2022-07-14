@@ -1,5 +1,5 @@
 import { defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
-import {resolve} from "pathe"
+import { resolve } from 'pathe'
 
 interface NuxtRuntimeCompilerOptions {
   nodeModulesRoot?: string,
@@ -12,8 +12,7 @@ export default defineNuxtModule({
     configKey: 'nuxtRuntimeCompiler'
   },
   setup (options: NuxtRuntimeCompilerOptions, nuxt) {
-
-    const { nodeModulesRoot = './', includeVue = true } = options;
+    const { nodeModulesRoot = './', includeVue = true } = options
 
     if (isNuxt2(nuxt)) {
       /** override all nuxt default vue aliases to force uses of the full bundle of VueJS  */
@@ -86,15 +85,15 @@ export default defineNuxtModule({
       // allow dynamic require -- passed to rollup
       const commonJS = {
         dynamicRequireTargets: [
-          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-core') ,
-          resolve(nodeModulesRoot, 'node_modules','@vue/compiler-dom'),
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-core'),
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-dom'),
           resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-ssr'),
           resolve(nodeModulesRoot, 'node_modules', 'vue/server-renderer')
         ].concat(nuxt.options.nitro.commonJS?.dynamicRequireTargets ?? [])
       }
 
-      if(includeVue) {
-        commonJS.dynamicRequireTargets.push(resolve(nodeModulesRoot, 'vue'))
+      if (includeVue) {
+        commonJS.dynamicRequireTargets.push(resolve(nodeModulesRoot, 'node_modules', 'vue'))
       }
 
       if (nuxt.options.nitro.commonJS) {
