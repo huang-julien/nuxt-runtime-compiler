@@ -60,7 +60,9 @@ export default defineNuxtModule({
         '@vue/compiler-core': '@vue/compiler-core',
         '@vue/compiler-dom': '@vue/compiler-dom',
         '@vue/compiler-ssr': '@vue/compiler-ssr',
-        'vue/server-renderer': 'vue/server-renderer'
+        'vue/server-renderer': 'vue/server-renderer',
+        'estree-walker': 'estree-walker',
+        '@babel/parser': '@babel/parser'
       }
 
       // set vue esm on client
