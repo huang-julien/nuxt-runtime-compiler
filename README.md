@@ -31,8 +31,8 @@ You can specify the node_modules root directory if your `node_modules` directory
 
 Default value is `./`
 
-For example if you are running `yarn workspace {YOUR_WORKSPACE} build` with a package in `root/packages/{YOUR_WORKSPACE}`
-then the nodeModulesRoot should be either 
+For example if you are running `nuxt build` with from a project in `root/packages/{YOUR_WORKSPACE}` while your `node_modules` in is `root/`
+then the nodeModulesRoot should be 
 ```ts
 export default defineNuxtConfig({
     modules: ["nuxt-runtime-compiler", {
