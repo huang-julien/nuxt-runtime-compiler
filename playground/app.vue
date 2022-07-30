@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Helloworld from './components/Helloworld.vue';
 const ready = useState('ready', () => false)
 /**
  * most of the time, vue compiler need at least a VNode, use h() from vue to define and render the component
@@ -50,6 +51,7 @@ const Interactive = h({
 <template>
   <!-- Edit this file to play around with Nuxt but never commit changes! -->
   <div>
+    <Helloworld />
     <template v-if="ready">
       <ComponentDefinedInSetup />
       <Name template="<div>I'm the Name.ts component</div>" />
