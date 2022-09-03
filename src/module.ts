@@ -66,10 +66,11 @@ export default defineNuxtModule({
       }
 
       nuxt.options.experimental.externalVue = false
-      
+
       // set vue esm on client
       nuxt.hook('vite:extendConfig', (config, { isClient }) => {
         if (isClient) {
+          // @ts-ignore -- expect an object
           config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
         }
       })
