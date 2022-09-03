@@ -65,6 +65,8 @@ export default defineNuxtModule({
         '@babel/parser': '@babel/parser'
       }
 
+      nuxt.options.experimental.externalVue = false
+      
       // set vue esm on client
       nuxt.hook('vite:extendConfig', (config, { isClient }) => {
         if (isClient) {
