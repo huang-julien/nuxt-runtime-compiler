@@ -66,7 +66,7 @@ export default defineNuxtModule({
       }
 
       nuxt.options.experimental.externalVue = false
-      
+
       // set vue esm on client
       nuxt.hook('vite:extendConfig', (config, { isClient }) => {
         if (isClient) {
