@@ -11,7 +11,7 @@ export default defineNuxtModule({
     configKey: 'nuxtRuntimeCompiler'
   },
   setup (options: NuxtRuntimeCompilerOptions, nuxt) {
-    const { nodeModulesRoot = './', includeVue = true } = options
+    const { nodeModulesRoot = './' } = options
 
     if (isNuxt2(nuxt)) {
       /** override all nuxt default vue aliases to force uses of the full bundle of VueJS  */
