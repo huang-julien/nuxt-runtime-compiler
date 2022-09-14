@@ -2,8 +2,7 @@ import { defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
 import { resolve } from 'pathe'
 
 interface NuxtRuntimeCompilerOptions {
-  nodeModulesRoot?: string,
-  includeVue?: boolean
+  nodeModulesRoot?: string
 }
 
 export default defineNuxtModule({
@@ -93,12 +92,9 @@ export default defineNuxtModule({
           resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-core'),
           resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-dom'),
           resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-ssr'),
-          resolve(nodeModulesRoot, 'node_modules', 'vue/server-renderer')
+          resolve(nodeModulesRoot, 'node_modules', 'vue/server-renderer'),
+          resolve(nodeModulesRoot, 'node_modules', 'vue')
         ].concat(nuxt.options.nitro.commonJS?.dynamicRequireTargets ?? [])
-      }
-
-      if (includeVue) {
-        commonJS.dynamicRequireTargets.push(resolve(nodeModulesRoot, 'node_modules', 'vue'))
       }
 
       if (nuxt.options.nitro.commonJS) {
