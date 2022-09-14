@@ -20,8 +20,7 @@ The module has some options built-in
 ```ts
 
 interface NuxtRuntimeCompilerOptions {
-  nodeModulesRoot?: string,
-  includeVue?: boolean
+  nodeModulesRoot?: string
 }
 
 ```
@@ -38,24 +37,5 @@ export default defineNuxtConfig({
     modules: ["nuxt-runtime-compiler", {
         nodeModulesRoot: "../../"
     }]
-})
-```
-
-### includeVue
-By default this option is set to true. It adds the vue package to the dynamic require targets of Rollup.
-
-
-## Issues
-### "[nuxt] [request error] ... is not defined " on Nuxt 3
-###### Fixed in 1.0.9 by unmocking estree and babel/parser for the compiler-dom
-Defining components in files that are used by nuxt might cause some template compilation issues with the interpolation.
-If you are defining your component in files that are directly imported and compiled by nuxt, prefer using the render function instead of the template key.
-
-```ts
-import {defineNuxtComponent} from "#imports";
-import {compile} from "vue";
-
-export default defineNuxtComponent({
-  render: compile(template)
 })
 ```
