@@ -1,6 +1,6 @@
 {
   "name": "nuxt-runtime-compiler",
-  "version": "1.0.10",
+  "version": "1.1.1",
   "description": "A simple module enabling the vue template compiler on Nuxt 2 and 3",
   "license": "MIT",
   "type": "module",
