@@ -53,7 +53,7 @@ export default defineNuxtModule({
         ...aliases
       }
     } else if (isNuxt3(nuxt)) {
-      if(!nuxt.options.nitro) { nuxt.options.nitro = {} }
+      if (!nuxt.options.nitro) { nuxt.options.nitro = {} }
       // remove vue 3 mocks
       nuxt.options.alias = {
         ...nuxt.options.alias,
@@ -67,25 +67,32 @@ export default defineNuxtModule({
 
       if (nuxt.options.experimental.externalVue) {
         // force include files not traced by NFT but used by generated code from the runtime compiler
-        if(!nuxt.options.nitro.externals) {
+        if (!nuxt.options.nitro.externals) {
           nuxt.options.nitro.externals = {
             traceInclude: []
           }
         }
-        if(!nuxt.options.nitro.externals.traceInclude) {
+        if (!nuxt.options.nitro.externals.traceInclude) {
           nuxt.options.nitro.externals.traceInclude = []
         }
         nuxt.options.nitro.externals.traceInclude.push(resolve(nodeModulesRoot, 'node_modules', 'vue', 'server-renderer', 'index.js'))
       } else {
+        const requireTargets = [
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-core'),
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-dom'),
+          resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-ssr'),
+          resolve(nodeModulesRoot, 'node_modules', 'vue/server-renderer'),
+          resolve(nodeModulesRoot, 'node_modules', 'vue')
+        ]
+
         // allow dynamic require -- passed to rollup
         const commonJS = {
-          dynamicRequireTargets: [
-            resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-core'),
-            resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-dom'),
-            resolve(nodeModulesRoot, 'node_modules', '@vue/compiler-ssr'),
-            resolve(nodeModulesRoot, 'node_modules', 'vue/server-renderer'),
-            resolve(nodeModulesRoot, 'node_modules', 'vue')
-          ].concat(nuxt.options.nitro.commonJS?.dynamicRequireTargets ?? [])
+          dynamicRequireTargets: typeof nuxt.options.nitro.commonJS?.dynamicRequireTargets === 'string'
+            ? [
+                ...requireTargets,
+                nuxt.options.nitro.commonJS?.dynamicRequireTargets
+              ]
+            : requireTargets.concat(nuxt.options.nitro.commonJS?.dynamicRequireTargets as string[] ?? [])
         }
 
         if (nuxt.options.nitro.commonJS) {
@@ -95,24 +102,23 @@ export default defineNuxtModule({
         }
       }
 
-      // set vue esm on client
-      nuxt.hook('vite:extendConfig', (config, { isClient }) => {
-        if (isClient) {
-          // @ts-ignore -- expect an object
-          config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
-        }
+      // set vue esm alias on vite and webpack
+      nuxt.hook('vite:extendConfig', (config) => {
+        // @ts-ignore -- expect an object
+        config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
       })
       nuxt.hook('webpack:config', (configuration) => {
-        const clientConfig = configuration.find(config => config.name === 'client')
-        if (!clientConfig.resolve) { clientConfig.resolve.alias = {} }
-        if (Array.isArray(clientConfig.resolve.alias)) {
-          clientConfig.resolve.alias.push({
-            name: 'vue',
-            alias: 'vue/dist/vue.esm-bundler'
-          })
-        } else {
-          clientConfig.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
-        }
+        configuration.forEach((config) => {
+          if (!config.resolve) { config.resolve.alias = {} }
+          if (Array.isArray(config.resolve.alias)) {
+            config.resolve.alias.push({
+              name: 'vue',
+              alias: 'vue/dist/vue.esm-bundler'
+            })
+          } else {
+            config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
+          }
+        })
       })
     }
   }
