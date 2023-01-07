@@ -103,9 +103,12 @@ export default defineNuxtModule({
       }
 
       // set vue esm alias on vite and webpack
-      nuxt.hook('vite:extendConfig', (config) => {
-        // @ts-ignore -- expect an object
-        config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
+      nuxt.hook('vite:extendConfig', (config, { isClient }) => {
+        // don't set the alias on server with externalVue false
+        if (nuxt.options.experimental.externalVue || isClient) {
+          // @ts-ignore -- expect an object
+          config.resolve.alias.vue = 'vue/dist/vue.esm-bundler'
+        }
       })
       nuxt.hook('webpack:config', (configuration) => {
         configuration.forEach((config) => {
