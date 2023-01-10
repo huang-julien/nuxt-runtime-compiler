@@ -25,7 +25,8 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "test": "nuxi prepare ./test/fixtures/base && nuxi prepare ./test/fixtures/external-vue-disabled && vitest --dir test"
+    "test": "vitest --dir test",
+    "test:external-vue-disabled": "npx cross-env FIXTURE=external-vue-disabled yarn test"
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0",
