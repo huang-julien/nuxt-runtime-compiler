@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { setup, getBrowser, url, $fetch } from '@nuxt/test-utils'
 
 await setup({
-  rootDir: fileURLToPath(new URL('./fixtures/base', import.meta.url)),
+  rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
   browser: true,
   server: true
 })
