@@ -5,7 +5,8 @@ import { setup, getBrowser, url, $fetch } from '@nuxt/test-utils'
 await setup({
   rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
   browser: true,
-  server: true
+  server: true,
+  dev: !!process.env.NUXT_TEST_DEV
 })
 
 describe('test basic config', () => {
