@@ -112,7 +112,8 @@ export default defineNuxtModule({
       })
       nuxt.hook('webpack:config', (configuration) => {
         configuration.forEach((config) => {
-          if (!config.resolve) { config.resolve.alias = {} }
+          if (!config.resolve) { config.resolve = { alias: [] } }
+          if (!config.resolve.alias) { config.resolve.alias = [] }
           if (Array.isArray(config.resolve.alias)) {
             config.resolve.alias.push({
               name: 'vue',

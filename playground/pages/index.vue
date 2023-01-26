@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Helloworld from '../components/Helloworld.vue';
+import Helloworld from '../components/Helloworld.vue'
 const ready = useState('ready', () => false)
 
 const count = ref(0)
@@ -9,7 +9,7 @@ const compTemplate = computed(() => `
     <div>hello i'm defined in the setup of app.vue</div>
     <div>This component's template is in a computed refreshed on count</div>
     count:` + count.value + `.
-    I don\'t recommend you to do this for performance issue, prefer passing props for mutable data.
+    I don't recommend you to do this for performance issue, prefer passing props for mutable data.
 </div>`
 )
 
@@ -64,8 +64,10 @@ const Interactive = h({
   <!-- Edit this file to play around with Nuxt but never commit changes! -->
   <div>
     <Helloworld />
-      <ComponentDefinedInSetup />
-      <button @click="count++" > {{count}}</button>
+    <ComponentDefinedInSetup />
+    <button @click="count++">
+      {{ count }}
+    </button>
     <template v-if="ready">
       <Name template="<div>I'm the Name.ts component</div>" />
       <show-template :template="data.templateString" name="Julien" />

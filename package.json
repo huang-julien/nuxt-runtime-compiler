@@ -30,7 +30,8 @@
     "test:webpack": "npx cross-env BUILDER=webpack vitest --dir test", 
     "test:external-vue-disabled": "npx cross-env FIXTURE=external-vue-disabled yarn test",
     "test:external-vue-disabled:dev": "npx cross-env NUXT_TEST_DEV=true FIXTURE=external-vue-disabled yarn test",
-    "test:external-vue-disabled:webpack": "npx cross-env BUILDER=webpack FIXTURE=external-vue-disabled yarn test"
+    "test:external-vue-disabled:webpack": "npx cross-env BUILDER=webpack FIXTURE=external-vue-disabled yarn test",    
+    "lint": "eslint --ext .vue,.js,.ts ./"
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0",
