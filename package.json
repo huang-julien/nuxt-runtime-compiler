@@ -24,7 +24,13 @@
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "test": "vitest --dir test",
+    "test:dev": "npx cross-env NUXT_TEST_DEV=true yarn test",
+    "test:webpack": "npx cross-env BUILDER=webpack vitest --dir test", 
+    "test:external-vue-disabled": "npx cross-env FIXTURE=external-vue-disabled yarn test",
+    "test:external-vue-disabled:dev": "npx cross-env NUXT_TEST_DEV=true FIXTURE=external-vue-disabled yarn test",
+    "test:external-vue-disabled:webpack": "npx cross-env BUILDER=webpack FIXTURE=external-vue-disabled yarn test"
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0",
@@ -32,9 +38,13 @@
   },
   "devDependencies": {
     "@nuxt/module-builder": "latest",
+    "@nuxt/test-utils": "^3.0.0",
+    "@nuxt/webpack-builder": "^3.0.0",
     "@nuxtjs/eslint-config-typescript": "latest",
     "eslint": "latest",
-    "nuxt": "^3.0.0"
+    "nuxt": "^3.0.0",
+    "playwright": "^1.29.1",
+    "vitest": "^0.26.3"
   },
   "keywords": [
     "nuxt",
