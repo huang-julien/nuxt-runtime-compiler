@@ -21,6 +21,9 @@ The module has some options built-in
 
 interface NuxtRuntimeCompilerOptions {
   nodeModulesRoot?: string
+  vue?: {
+    customElementTags?: string[]
+  }
 }
 
 ```
@@ -28,7 +31,7 @@ interface NuxtRuntimeCompilerOptions {
 
 You can specify the node_modules root directory if your `node_modules` directory is not at your `process.cwd()`.
 
-Default value is `./`
+- Default value is `./`
 
 For example if you are running `nuxt build` from a project in `root/packages/{YOUR_WORKSPACE}` while your `node_modules` is in `root/`
 then the nodeModulesRoot should be 
@@ -39,3 +42,10 @@ export default defineNuxtConfig({
     }]
 })
 ```
+
+## vue
+### customElementTags
+
+- type: `string[]`
+
+List of tags passed to the vue app config `isCustomElements` at runtime. Setting this option will overwrite `vue.compilerOptions.isCustomElement` in your `nuxt.config.ts`
