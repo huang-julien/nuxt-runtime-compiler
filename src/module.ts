@@ -1,11 +1,8 @@
-import { addPluginTemplate, defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
-import { resolve } from 'pathe'
+import { resolve } from 'path'
+import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
 
 interface NuxtRuntimeCompilerOptions {
-  nodeModulesRoot?: string,
-  vue?: {
-    customElementTags?: string[]
-  }
+  nodeModulesRoot?: string
 }
 
 export default defineNuxtModule({
@@ -13,7 +10,7 @@ export default defineNuxtModule({
     name: 'nuxt-runtime-compiler',
     configKey: 'nuxtRuntimeCompiler'
   },
-  setup ({ nodeModulesRoot = './', vue = {} } : NuxtRuntimeCompilerOptions, nuxt) {
+  async setup ({ nodeModulesRoot = './' } : NuxtRuntimeCompilerOptions, nuxt) {
     if (isNuxt2(nuxt)) {
       /** override all nuxt default vue aliases to force uses of the full bundle of VueJS  */
       const vueFullCommonPath = 'vue/dist/vue.common.js'
@@ -126,28 +123,15 @@ export default defineNuxtModule({
         })
       })
 
-      const { customElementTags } = vue
+      const resolver = createResolver(import.meta.url)
+      const runtimeDir = await resolver.resolve('./runtime')
+      nuxt.options.build.transpile.push(runtimeDir)
 
-      if (customElementTags) {
-        addPluginTemplate({
-          filename: 'nuxt-runtime-compiler.plugin.mjs',
-          getContents: () => {
-            return `
-              import {defineNuxtPlugin} from "#imports"
+      addPlugin(resolve(runtimeDir, 'nuxt-runtime-compiler.plugin.ts'))
 
-              export default defineNuxtPlugin(nuxtApp => {
-                nuxtApp.vueApp.config.compilerOptions.isCustomElement = (tag) => {
-                  return ${JSON.stringify(customElementTags)}.includes(tag)
-                }
-              })
-            `
-          }
-        })
-
-        nuxt.options.vue.compilerOptions.isCustomElement = (tag) => {
-          return customElementTags.includes(tag)
-        }
-      }
+      nuxt.hook('prepare:types', ({ references }) => {
+        references.push({ path: resolve(runtimeDir, 'types.d.ts') })
+      })
     }
   }
 })

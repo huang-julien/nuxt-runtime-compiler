@@ -42,10 +42,3 @@ export default defineNuxtConfig({
     }]
 })
 ```
-
-## vue
-### customElementTags
-
-- type: `string[]`
-
-List of tags passed to the vue app config `isCustomElements` at runtime. Setting this option will overwrite `vue.compilerOptions.isCustomElement` in your `nuxt.config.ts`
