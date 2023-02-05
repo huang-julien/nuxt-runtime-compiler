@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-import { existsSync } from 'fs'
 import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
 import type { AppConfig } from '@nuxt/schema'
 
@@ -136,13 +135,12 @@ export default defineNuxtModule({
       })
 
       const appConfigPath = await resolve(nuxt.options.srcDir, 'app.config')
-
-      // use AppConfig to define vue compiler options at build time
-      if (existsSync(appConfigPath)) {
+      try {
+        // use AppConfig to define vue compiler options at build time
         const globalDefineAppConfig = (globalThis as any).defineAppConfig
 
         if (!globalDefineAppConfig) {
-          // allow defineAppConfig
+        // allow defineAppConfig
           (globalThis as any).defineAppConfig = (c: any) => c
         }
         const appConfig = await import(appConfigPath) as AppConfig
@@ -169,6 +167,8 @@ export default defineNuxtModule({
         if (!globalDefineAppConfig) {
           delete (globalThis as any).defineAppConfig
         }
+      } catch {
+        // app.config file don't exist
       }
     }
   }
