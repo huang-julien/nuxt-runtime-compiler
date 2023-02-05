@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import { existsSync } from 'fs'
-import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3, resolvePath } from '@nuxt/kit'
+import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
 import type { AppConfig } from '@nuxt/schema'
 
 interface NuxtRuntimeCompilerOptions {
@@ -135,7 +135,7 @@ export default defineNuxtModule({
         references.push({ path: resolve(runtimeDir, 'types.d.ts') })
       })
 
-      const appConfigPath = await resolvePath('app.config')
+      const appConfigPath = await resolve(nuxt.options.srcDir, 'app.config')
 
       // use AppConfig to define vue compiler options at build time
       if (existsSync(appConfigPath)) {
