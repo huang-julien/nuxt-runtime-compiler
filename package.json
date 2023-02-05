@@ -1,7 +1,7 @@
 {
   "name": "nuxt-runtime-compiler",
   "version": "1.2.0",
-  "description": "A simple module enabling the vue template compiler on Nuxt 2 and 3",
+  "description": "A simple module enabling the vue full bundle on Nuxt 2 and 3",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -51,6 +51,7 @@
     "nuxt",
     "nuxt runtime compiler",
     "nuxtjs",
-    "ssr"
+    "ssr",
+    "vue"
   ]
 }
