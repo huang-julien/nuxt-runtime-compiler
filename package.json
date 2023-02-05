@@ -34,16 +34,16 @@
     "lint": "eslint --ext .vue,.js,.ts ./"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0",
+    "@nuxt/kit": "^3.1.2",
     "pathe": "^0.3.2"
   },
   "devDependencies": {
     "@nuxt/module-builder": "latest",
-    "@nuxt/test-utils": "^3.0.0",
-    "@nuxt/webpack-builder": "^3.0.0",
+    "@nuxt/test-utils": "^3.1.2",
+    "@nuxt/webpack-builder": "^3.1.2",
     "@nuxtjs/eslint-config-typescript": "latest",
     "eslint": "latest",
-    "nuxt": "^3.0.0",
+    "nuxt": "^3.1.2",
     "playwright": "^1.29.1",
     "vitest": "^0.26.3"
   },
