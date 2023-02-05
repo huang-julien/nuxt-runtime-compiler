@@ -12,6 +12,9 @@
     "resolveJsonModule": true,
     "types": [
       "node"
-    ]
+    ],
+    "paths": {
+      "#imports": ["./node_modules/nuxt/app.d.ts"],
+    }
   } 
 }

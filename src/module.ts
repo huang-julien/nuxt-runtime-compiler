@@ -1,5 +1,7 @@
-import { defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
-import { resolve } from 'pathe'
+import { resolve } from 'path'
+import { existsSync } from 'fs'
+import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3, resolvePath } from '@nuxt/kit'
+import type { AppConfig } from '@nuxt/schema'
 
 interface NuxtRuntimeCompilerOptions {
   nodeModulesRoot?: string
@@ -10,9 +12,7 @@ export default defineNuxtModule({
     name: 'nuxt-runtime-compiler',
     configKey: 'nuxtRuntimeCompiler'
   },
-  setup (options: NuxtRuntimeCompilerOptions, nuxt) {
-    const { nodeModulesRoot = './' } = options
-
+  async setup ({ nodeModulesRoot = './' } : NuxtRuntimeCompilerOptions, nuxt) {
     if (isNuxt2(nuxt)) {
       /** override all nuxt default vue aliases to force uses of the full bundle of VueJS  */
       const vueFullCommonPath = 'vue/dist/vue.common.js'
@@ -124,6 +124,52 @@ export default defineNuxtModule({
           }
         })
       })
+
+      const resolver = createResolver(import.meta.url)
+      const runtimeDir = await resolver.resolve('./runtime')
+      nuxt.options.build.transpile.push(runtimeDir)
+
+      addPlugin(resolve(runtimeDir, 'nuxt-runtime-compiler.plugin.ts'))
+
+      nuxt.hook('prepare:types', ({ references }) => {
+        references.push({ path: resolve(runtimeDir, 'types.d.ts') })
+      })
+
+      const appConfigPath = await resolvePath('app.config')
+
+      // use AppConfig to define vue compiler options at build time
+      if (existsSync(appConfigPath)) {
+        const globalDefineAppConfig = (globalThis as any).defineAppConfig
+
+        if (!globalDefineAppConfig) {
+          // allow defineAppConfig
+          (globalThis as any).defineAppConfig = (c: any) => c
+        }
+        const appConfig = await import(appConfigPath) as AppConfig
+
+        nuxt.options.vite.vue = {
+          ...nuxt.options.vite.vue,
+          template: {
+            ...nuxt.options.vite.vue?.template,
+            compilerOptions: {
+              ...nuxt.options.vite.vue?.template?.compilerOptions,
+              ...appConfig.vue?.compilerOptions
+            }
+          }
+        }
+
+        nuxt.options.webpack.loaders.vue = {
+          ...nuxt.options.webpack.loaders.vue,
+          compilerOptions: {
+            ...nuxt.options.webpack.loaders.vue.compilerOptions,
+            ...appConfig.vue?.compilerOptions
+          }
+        }
+
+        if (!globalDefineAppConfig) {
+          delete (globalThis as any).defineAppConfig
+        }
+      }
     }
   }
 })

@@ -25,12 +25,12 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "test": "vitest --dir test",
+    "test": "yarn nuxi prepare ./test/fixtures/basic && vitest --dir test",
     "test:dev": "npx cross-env NUXT_TEST_DEV=true yarn test",
-    "test:webpack": "npx cross-env BUILDER=webpack vitest --dir test", 
+    "test:webpack": "npx cross-env BUILDER=webpack vitest --dir test",
     "test:external-vue-disabled": "npx cross-env FIXTURE=external-vue-disabled yarn test",
     "test:external-vue-disabled:dev": "npx cross-env NUXT_TEST_DEV=true FIXTURE=external-vue-disabled yarn test",
-    "test:external-vue-disabled:webpack": "npx cross-env BUILDER=webpack FIXTURE=external-vue-disabled yarn test",    
+    "test:external-vue-disabled:webpack": "npx cross-env BUILDER=webpack FIXTURE=external-vue-disabled yarn test",
     "lint": "eslint --ext .vue,.js,.ts ./"
   },
   "dependencies": {
