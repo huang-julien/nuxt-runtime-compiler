@@ -8,8 +8,10 @@ Add the module to nuxt config file:
 
 `nuxt.config.ts`
 ```ts
+import nuxtRuntimeCompiler from "nuxt-runtime-compiler"
+
 export default defineNuxtConfig({
-    modules: ["nuxt-runtime-compiler"]
+    modules: [nuxtRuntimeCompiler]
 })
 ```
 
@@ -33,8 +35,10 @@ You can specify the node_modules root directory if your `node_modules` directory
 For example if you are running `nuxt build` from a project in `root/packages/{YOUR_WORKSPACE}` while your `node_modules` is in `root/`
 then the nodeModulesRoot should be 
 ```ts
+import nuxtRuntimeCompiler from "nuxt-runtime-compiler"
+
 export default defineNuxtConfig({
-    modules: ["nuxt-runtime-compiler", {
+    modules: [nuxtRuntimeCompiler, {
         nodeModulesRoot: "../../"
     }]
 })
