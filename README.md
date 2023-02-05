@@ -15,6 +15,8 @@ export default defineNuxtConfig({
 })
 ```
 
+Since this module might need to import `.ts` files, it needs to be imported within your `nuxt.config.ts` file and be added in the `modules` array as a variable instead of a string.
+
 ## Options 
 
 The module has some options built-in
