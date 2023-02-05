@@ -129,7 +129,7 @@ export default defineNuxtModule({
       const runtimeDir = await resolver.resolve('./runtime')
       nuxt.options.build.transpile.push(runtimeDir)
 
-      addPlugin(resolve(runtimeDir, 'nuxt-runtime-compiler.plugin.ts'))
+      addPlugin(resolve(runtimeDir, 'nuxt-runtime-compiler.plugin'))
 
       nuxt.hook('prepare:types', ({ references }) => {
         references.push({ path: resolve(runtimeDir, 'types.d.ts') })
