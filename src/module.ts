@@ -1,5 +1,7 @@
 import { resolve } from 'path'
-import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
+import { existsSync } from 'fs'
+import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3, resolvePath } from '@nuxt/kit'
+import type { AppConfig } from '@nuxt/schema'
 
 interface NuxtRuntimeCompilerOptions {
   nodeModulesRoot?: string
@@ -132,6 +134,42 @@ export default defineNuxtModule({
       nuxt.hook('prepare:types', ({ references }) => {
         references.push({ path: resolve(runtimeDir, 'types.d.ts') })
       })
+
+      const appConfigPath = await resolvePath('app.config')
+
+      // use AppConfig to define vue compiler options at build time
+      if (existsSync(appConfigPath)) {
+        const globalDefineAppConfig = (globalThis as any).defineAppConfig
+
+        if (!globalDefineAppConfig) {
+          // allow defineAppConfig
+          (globalThis as any).defineAppConfig = (c: any) => c
+        }
+        const appConfig = await import(appConfigPath) as AppConfig
+
+        nuxt.options.vite.vue = {
+          ...nuxt.options.vite.vue,
+          template: {
+            ...nuxt.options.vite.vue?.template,
+            compilerOptions: {
+              ...nuxt.options.vite.vue?.template?.compilerOptions,
+              ...appConfig.vue?.compilerOptions
+            }
+          }
+        }
+
+        nuxt.options.webpack.loaders.vue = {
+          ...nuxt.options.webpack.loaders.vue,
+          compilerOptions: {
+            ...nuxt.options.webpack.loaders.vue.compilerOptions,
+            ...appConfig.vue?.compilerOptions
+          }
+        }
+
+        if (!globalDefineAppConfig) {
+          delete (globalThis as any).defineAppConfig
+        }
+      }
     }
   }
 })

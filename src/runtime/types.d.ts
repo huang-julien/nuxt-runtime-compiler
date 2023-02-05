@@ -11,6 +11,6 @@ declare module '@nuxt/schema' {
     interface AppConfigInput {
         vue?: {
             compilerOptions?: RuntimeCompilerOptions
-        } 
+        }
     }
 }

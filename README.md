@@ -44,9 +44,8 @@ export default defineNuxtConfig({
 
 See [app.config documentation](https://nuxt.com/docs/examples/app/app-config)
 This module overloads the `AppConfig` exported by `app.config.ts` to pass the [RuntimeCompilerOptions](https://github.com/vuejs/core/blob/dbe7109c8f6417770129dc92313f05feac0c0edb/packages/runtime-core/src/componentOptions.ts#L213-L218) to your VueApp in runtime.
-If you are using CustomElements within your built components (`.vue`), you still have to pass the `CompilerOptions` in your `nuxt.config.ts` since this will be needed at build time.
 
-Options needs to be passed through `vue.compilerOptions`
+Compatible options from [RuntimeCompilerOptions](https://github.com/vuejs/core/blob/dbe7109c8f6417770129dc92313f05feac0c0edb/packages/runtime-core/src/componentOptions.ts#L213-L218) in `app.config` will also be used by the builder during build time.
 
 `app.config.ts`
 
