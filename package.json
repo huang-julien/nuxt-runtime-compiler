@@ -1,6 +1,6 @@
 {
   "name": "nuxt-runtime-compiler",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple module enabling the vue full bundle on Nuxt 2 and 3",
   "license": "MIT",
   "type": "module",
