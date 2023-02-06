@@ -6,14 +6,13 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "import": "./src/module.ts",
+      "require": "./src/module.ts"
     }
   },
-  "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
+  "main": "./src/module.ts",
   "files": [
-    "dist"
+    "src"
   ],
   "homepage": "https://github.com/huang-julien/nuxt-runtime-compiler",
   "repository": {
@@ -21,7 +20,6 @@
     "url": "https://github.com/huang-julien/nuxt-runtime-compiler"
   },
   "scripts": {
-    "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
