@@ -8,14 +8,10 @@ Add the module to nuxt config file:
 
 `nuxt.config.ts`
 ```ts
-import nuxtRuntimeCompiler from "nuxt-runtime-compiler"
-
 export default defineNuxtConfig({
-    modules: [nuxtRuntimeCompiler]
+    modules: ['nuxt-runtime-compiler']
 })
 ```
-
-Since this module might need to import `.ts` files, it needs to be imported within your `nuxt.config.ts` file and be added in the `modules` array as a variable instead of a string.
 
 ## Options 
 
@@ -37,10 +33,9 @@ You can specify the node_modules root directory if your `node_modules` directory
 For example if you are running `nuxt build` from a project in `root/packages/{YOUR_WORKSPACE}` while your `node_modules` is in `root/`
 then the nodeModulesRoot should be 
 ```ts
-import nuxtRuntimeCompiler from "nuxt-runtime-compiler"
 
 export default defineNuxtConfig({
-    modules: [nuxtRuntimeCompiler, {
+    modules: ['nuxt-runtime-compiler', {
         nodeModulesRoot: "../../"
     }]
 })
