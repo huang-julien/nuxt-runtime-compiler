@@ -1,8 +1,6 @@
-import nuxtRuntimeCompiler from '../../../src/module'
-
 export default defineNuxtConfig({
   modules: [
-    nuxtRuntimeCompiler
+    'nuxt-runtime-compiler'
   ],
   experimental: {
     externalVue: !process.env.NO_EXTERNAL_VUE

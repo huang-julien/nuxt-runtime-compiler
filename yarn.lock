@@ -692,17 +692,6 @@
     unimport "^2.1.0"
     untyped "^1.2.2"
 
-"@nuxt/module-builder@latest":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@nuxt/module-builder/-/module-builder-0.2.1.tgz#e74539b8cb97fc4dfa66cde74e7ceb68dc1832cb"
-  integrity sha512-Om8q08CO2joxiv9piTL+jcFUAL7nOZrrq9DedbA0PoRww1It1UnRs3Mijp0MfkFNyGHwWbSbmvbo3EhWmGdWUg==
-  dependencies:
-    consola "^2.15.3"
-    mlly "^1.0.0"
-    mri "^1.2.0"
-    pathe "^1.0.0"
-    unbuild "^1.0.1"
-
 "@nuxt/schema@3.1.2":
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/@nuxt/schema/-/schema-3.1.2.tgz#a916ecfa96c04553403f7da8d1e7058f65cb3ad1"
@@ -895,14 +884,14 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
-"@rollup/plugin-alias@^4.0.2", "@rollup/plugin-alias@^4.0.3":
+"@rollup/plugin-alias@^4.0.3":
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-4.0.3.tgz#571f6fb26387df91d0363905a7fd835757727ae2"
   integrity sha512-ZuDWE1q4PQDhvm/zc5Prun8sBpLJy41DMptYrS6MhAy9s9kL/doN1613BWfEchGVfKxzliJ3BjbOPizXX38DbQ==
   dependencies:
     slash "^4.0.0"
 
-"@rollup/plugin-commonjs@^24.0.0", "@rollup/plugin-commonjs@^24.0.1":
+"@rollup/plugin-commonjs@^24.0.1":
   version "24.0.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-24.0.1.tgz#d54ba26a3e3c495dc332bd27a81f7e9e2df46f90"
   integrity sha512-15LsiWRZk4eOGqvrJyu3z3DaBu5BhXIMeWnijSRvd8irrrg9SHpQ1pH+BUK4H6Z9wL9yOxZJMTLU+Au86XHxow==
@@ -2642,7 +2631,7 @@ esbuild-loader@^2.21.0:
     tapable "^2.2.0"
     webpack-sources "^1.4.3"
 
-esbuild@^0.16.14, esbuild@^0.16.16, esbuild@^0.16.17:
+esbuild@^0.16.14, esbuild@^0.16.17:
   version "0.16.17"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.16.17.tgz#fc2c3914c57ee750635fee71b89f615f25065259"
   integrity sha512-G8LEkV0XzDMNwXKgM0Jwu3nY3lSTwSGY6XbxM9cr9+s0T/qSV1q1JVPBGzm3dcjhCic9+emZDmMffkwgPeOeLg==
@@ -4436,23 +4425,10 @@ mkdir@^0.0.2:
   resolved "https://registry.yarnpkg.com/mkdir/-/mkdir-0.0.2.tgz#3b9da7a4e5b13004ebc636581b160e1e04776851"
   integrity sha512-98OnjcWaNEIRUJJe9rFoWlbkQ5n9z8F86wIPCrI961YEViiVybTuJln919WuuSHSnlrqXy0ELKCntoPy8C7lqg==
 
-mkdirp@^1.0.3, mkdirp@^1.0.4:
+mkdirp@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
-
-mkdist@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/mkdist/-/mkdist-1.1.0.tgz#35f687514d0997e3996a269f12a18de87ea91423"
-  integrity sha512-eTw467KIfd/ilsY/yS6N/fjCe/glP99bTU+ydVJFRUZYaZ3UnL09Q5SGVhMrHLr4Q5qL1pDVDgitQTmLLpUa2A==
-  dependencies:
-    defu "^6.1.1"
-    esbuild "^0.16.16"
-    fs-extra "^11.1.0"
-    globby "^13.1.3"
-    jiti "^1.16.2"
-    mri "^1.2.0"
-    pathe "^1.0.0"
 
 mlly@^1.0.0, mlly@^1.1.0:
   version "1.1.0"
@@ -5545,15 +5521,6 @@ rimraf@^3.0.2:
   dependencies:
     glob "^7.1.3"
 
-rollup-plugin-dts@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-dts/-/rollup-plugin-dts-5.1.1.tgz#8cc36ab13135b77ef0cfd6107e4af561c5dffd04"
-  integrity sha512-zpgo52XmnLg8w4k3MScinFHZK1+ro6r7uVe34fJ0Ee8AM45FvgvTuvfWWaRgIpA4pQ1BHJuu2ospncZhkcJVeA==
-  dependencies:
-    magic-string "^0.27.0"
-  optionalDependencies:
-    "@babel/code-frame" "^7.18.6"
-
 rollup-plugin-visualizer@^5.9.0:
   version "5.9.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-visualizer/-/rollup-plugin-visualizer-5.9.0.tgz#013ac54fb6a9d7c9019e7eb77eced673399e5a0b"
@@ -6235,11 +6202,6 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
-typescript@^4.9.4:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
-
 ufo@^1.0.0, ufo@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ufo/-/ufo-1.0.1.tgz#64ed43b530706bda2e4892f911f568cf4cf67d29"
@@ -6259,38 +6221,6 @@ unbox-primitive@^1.0.2:
     has-bigints "^1.0.2"
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
-
-unbuild@^1.0.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/unbuild/-/unbuild-1.1.1.tgz#c283f1bdb1a209f5446d29336887dd265facfab0"
-  integrity sha512-HlhHj6cUPBQJmhoczQoU6dzdTFO0Jr9EiGWEZ1EwHGXlGRR6LXcKyfX3PMrkM48uWJjBWiCgTQdkFOAk3tlK6Q==
-  dependencies:
-    "@rollup/plugin-alias" "^4.0.2"
-    "@rollup/plugin-commonjs" "^24.0.0"
-    "@rollup/plugin-json" "^6.0.0"
-    "@rollup/plugin-node-resolve" "^15.0.1"
-    "@rollup/plugin-replace" "^5.0.2"
-    "@rollup/pluginutils" "^5.0.2"
-    chalk "^5.2.0"
-    consola "^2.15.3"
-    defu "^6.1.1"
-    esbuild "^0.16.17"
-    globby "^13.1.3"
-    hookable "^5.4.2"
-    jiti "^1.16.2"
-    magic-string "^0.27.0"
-    mkdirp "^1.0.4"
-    mkdist "^1.1.0"
-    mlly "^1.1.0"
-    mri "^1.2.0"
-    pathe "^1.0.0"
-    pkg-types "^1.0.1"
-    pretty-bytes "^6.0.0"
-    rollup "^3.10.0"
-    rollup-plugin-dts "^5.1.1"
-    scule "^1.0.0"
-    typescript "^4.9.4"
-    untyped "^1.2.2"
 
 unctx@^2.1.1:
   version "2.1.1"
