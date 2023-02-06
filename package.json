@@ -36,7 +36,6 @@
     "pathe": "^0.3.2"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "latest",
     "@nuxt/test-utils": "^3.1.2",
     "@nuxt/webpack-builder": "^3.1.2",
     "@nuxtjs/eslint-config-typescript": "latest",
