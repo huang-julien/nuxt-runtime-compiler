@@ -2,6 +2,8 @@
 
 A simple module to enable vue runtime bundle on Nuxt 2 and 3
 
+:rocket: Runtime bundle can now be enabled in Nuxt 3.4 with `experimental.runtimeVueCompiler` and `vue.runtimeCompiler` in Nuxt 3.5 .
+
 ## Configuration
 
 Add the module to nuxt config file:
