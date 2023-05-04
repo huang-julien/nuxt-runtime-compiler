@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.1.2",
-    "pathe": "^0.3.2"
+    "pathe": "^0.3.2",
+    "semver": "^7.5.0"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^3.1.2",

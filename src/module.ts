@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { addPlugin, createResolver, defineNuxtModule, isNuxt2, isNuxt3 } from '@nuxt/kit'
 import type { AppConfig } from '@nuxt/schema'
+import { satisfies } from "semver"
 
 interface NuxtRuntimeCompilerOptions {
   nodeModulesRoot?: string
@@ -52,6 +53,19 @@ export default defineNuxtModule({
         ...aliases
       }
     } else if (isNuxt3(nuxt)) {
+      if(satisfies(nuxt._version, '>=3.4.0')) {
+        console.warn('This module has been merged as an experimental option in Nuxt 3.4 and is available as vue.runtimeCompiler in Nuxt 3.5')
+        if(satisfies(nuxt._version, '>=3.4.0 <3.5.0')) {
+          // @ts-ignore
+          nuxt.options.experimental.runtimeVueCompiler = true
+        } else {
+          // @ts-ignore
+          nuxt.options.vue.runtimeCompiler = true
+        }
+        return
+      }
+
+
       if (!nuxt.options.nitro) { nuxt.options.nitro = {} }
       // remove vue 3 mocks
       nuxt.options.alias = {
